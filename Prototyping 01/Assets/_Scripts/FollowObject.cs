@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class FollowObject : MonoBehaviour
 {
-    public GameObject player;
-
-    public Vector3 offset = new Vector3(0, 0, 0);
-
-    void Start()
-    {
-        
-    }
-
+    public GameObject objectToFollow;
     
+    [Header("OffSet")]
+    public Vector3 offset;
+
+
     void Update()
     {
-        transform.position = player.transform.position + offset;
+        transform.position = objectToFollow.transform.position+offset;
     }
 }
