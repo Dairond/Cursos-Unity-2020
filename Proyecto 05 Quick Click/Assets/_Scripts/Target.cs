@@ -63,8 +63,11 @@ public class Target : MonoBehaviour
         gameManager.objectCount++; //Count the amount of object destroyed during the game
         if(isNeutral)
         {
-            int neutralDiv = (gameManager.neutralCount / neutralEffect);
-            neutralValue = gameManager.neutralScore/neutralDiv;
+            if (gameManager.neutralCount > 0)
+            {
+                int neutralDiv = (gameManager.neutralCount / neutralEffect);
+                neutralValue = gameManager.neutralScore / neutralDiv;
+            }
             gameManager.UpdateScore(neutralValue);
             gameManager.neutralScore = 0;
             gameManager.neutralCount = 0;
@@ -81,6 +84,10 @@ public class Target : MonoBehaviour
         if(other.gameObject.CompareTag("KillZone"))
         {
             Destroy(gameObject);
+            if(pointValue > 0 )
+            {
+                gameManager.UpdateScore(-10);
+            }
         }
     }
 }

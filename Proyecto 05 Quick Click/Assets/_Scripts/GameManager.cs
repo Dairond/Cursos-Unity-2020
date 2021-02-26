@@ -9,7 +9,18 @@ public class GameManager : MonoBehaviour
     private float spawnRate = 1;
 
     public TextMeshProUGUI scoreText;
-    private int score;
+    private int _score;
+    private int Score
+    {
+        set
+        {
+            _score = Mathf.Clamp(value, 0, 9999999);
+        }
+        get
+        {
+            return _score;
+        }
+    }
 
     public int neutralScore;
     public int neutralCount;
@@ -18,7 +29,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(SpawnTarget());
 
-        score = 0;
+        Score = 0;
         UpdateScore(0);
     }
 
@@ -38,8 +49,8 @@ public class GameManager : MonoBehaviour
     /// <param name="scoreToAdd"></param>
     public void UpdateScore(int scoreToAdd)
     {
-        score += scoreToAdd;
+        Score += scoreToAdd;
         neutralScore += scoreToAdd;
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Score: " + Score;
     }
 }
