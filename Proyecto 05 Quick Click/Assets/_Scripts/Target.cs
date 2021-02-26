@@ -7,10 +7,18 @@ public class Target : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private float minForce = 12,
-     maxforce = 16,
-     maxTorque = 10, 
-     xRange = 4, 
-     ySpawnPos = -6;
+    maxforce = 16,
+    maxTorque = 10, 
+    xRange = 4, 
+    ySpawnPos = -6;
+
+    private GameManager gameManager;
+
+    [Range(-1000, 1000),SerializeField] private int pointValue;
+    private int neutralValue;
+    public int neutralEffect = 2;
+
+    public bool isNeutral;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +28,8 @@ public class Target : MonoBehaviour
         _rigidbody.AddTorque(RandomTorque(), 
         RandomTorque(), RandomTorque());
         transform.position = RandomSpawnPos();
+
+        gameManager = FindObjectOfType<GameManager>();
     }
     
     /// <summary>
@@ -50,6 +60,20 @@ public class Target : MonoBehaviour
     private void OnMouseDown()
     {
         Destroy(gameObject);
+        gameManager.objectCount++; //Count the amount of object destroyed during the game
+        if(isNeutral)
+        {
+            int neutralDiv = (gameManager.neutralCount / neutralEffect);
+            neutralValue = gameManager.neutralScore/neutralDiv;
+            gameManager.UpdateScore(neutralValue);
+            gameManager.neutralScore = 0;
+            gameManager.neutralCount = 0;
+        }
+        else
+        {
+            gameManager.UpdateScore(pointValue);
+            gameManager.neutralCount++;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

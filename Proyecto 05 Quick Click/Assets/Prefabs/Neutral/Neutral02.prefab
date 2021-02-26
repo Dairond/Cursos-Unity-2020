@@ -125,3 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c5631192cf76934aba4fec59a9af11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointValue: 0
+  neutralEffect: 4
+  isNeutral: 1
