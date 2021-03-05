@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - KillZone
+  - Good
+  - Bad
+  - Neutral
+  - PowerUp
   layers:
   - Default
   - TransparentFX

@@ -12,13 +12,15 @@ public class Target : MonoBehaviour
     xRange = 4, 
     ySpawnPos = -6;
 
-    private GameManager gameManager;
+    private GameManager _gameManager;
 
     [Range(-1000, 1000),SerializeField] private int pointValue;
+
+    public ParticleSystem explosionParticle;
+
     private int neutralValue;
     public int neutralEffect = 2;
-
-    public bool isNeutral;
+    [Range(0,2)] private int _objectType;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +31,19 @@ public class Target : MonoBehaviour
         RandomTorque(), RandomTorque());
         transform.position = RandomSpawnPos();
 
-        gameManager = FindObjectOfType<GameManager>();
+        _gameManager = FindObjectOfType<GameManager>();
+        if(gameObject.CompareTag("Neutral"))
+        {
+            _objectType = 1;
+        }
+        else if(gameObject.CompareTag("PowerUp"))
+        {
+            _objectType = 2;
+        }
+        else if(gameObject.CompareTag("Good") ^ gameObject.CompareTag("Bad"))
+        {
+            _objectType = 0;
+        }
     }
     
     /// <summary>
@@ -59,23 +73,13 @@ public class Target : MonoBehaviour
     
     private void OnMouseDown()
     {
-        Destroy(gameObject);
-        gameManager.objectCount++; //Count the amount of object destroyed during the game
-        if(isNeutral)
+        if (_gameManager.gameState == GameManager.GameState.inGame)
         {
-            if (gameManager.neutralCount > 0)
-            {
-                int neutralDiv = (gameManager.neutralCount / neutralEffect);
-                neutralValue = gameManager.neutralScore / neutralDiv;
-            }
-            gameManager.UpdateScore(neutralValue);
-            gameManager.neutralScore = 0;
-            gameManager.neutralCount = 0;
-        }
-        else
-        {
-            gameManager.UpdateScore(pointValue);
-            gameManager.neutralCount++;
+            Destroy(gameObject);
+            _gameManager.objectCount++; //Count the amount of object destroyed during the game
+            ObjectType(_objectType);
+            Instantiate(explosionParticle,
+                transform.position, explosionParticle.transform.rotation);
         }
     }
 
@@ -84,10 +88,34 @@ public class Target : MonoBehaviour
         if(other.gameObject.CompareTag("KillZone"))
         {
             Destroy(gameObject);
-            if(pointValue > 0 )
+            if(gameObject.CompareTag("Good"))
             {
-                gameManager.UpdateScore(-10);
+                _gameManager.GameOver();
             }
+        }
+    }
+    
+    /// <summary>
+    /// Determine the function of the target according to his type
+    /// </summary>
+    /// <param name="typeOBject">Type of the object</param>
+    private void ObjectType(int typeOBject)
+    {
+        if(typeOBject==1)
+        {
+            if (_gameManager.neutralCount > 0 & (_gameManager.neutralScore > 0 | _gameManager.neutralScore < 0))
+            {
+                float neutralDiv = _gameManager.neutralCount / neutralEffect;
+                neutralValue = (int)(_gameManager.neutralScore / neutralDiv);
+            }
+            _gameManager.UpdateScore(neutralValue);
+            _gameManager.neutralScore = 0;
+            _gameManager.neutralCount = 0;
+        }
+        else if (typeOBject==0)
+        {
+            _gameManager.UpdateScore(pointValue);
+            _gameManager.neutralCount++;
         }
     }
 }
