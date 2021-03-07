@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
         gameOver
     }
     public GameState gameState;
-
+    
     public List<GameObject> targetPrefabs;
     private float spawnRate = 1;
 
@@ -35,18 +35,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public GameObject titleScreen;
+
     public int neutralScore;
     public int neutralCount;
     public int objectCount;
-    void Start()
+    
+
+    /// <summary>
+    /// Method that start the game
+    /// </summary>
+    public void StartGame(int difficulty)
     {
         gameState = GameState.inGame;
+        titleScreen.gameObject.SetActive(false);
 
+        spawnRate /= difficulty;
         StartCoroutine(SpawnTarget());
 
         Score = 0;
         UpdateScore(0);
-        
     }
 
     IEnumerator SpawnTarget()

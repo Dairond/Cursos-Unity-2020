@@ -6,13 +6,13 @@ public class Target : MonoBehaviour
 {
 
     private Rigidbody _rigidbody;
-    private float minForce = 12,
-    maxforce = 16,
+    private float minForce = 13,
+    maxforce = 17,
     maxTorque = 10, 
     xRange = 4, 
     ySpawnPos = -6;
 
-    private GameManager _gameManager;
+    private GameManager gameManager;
 
     [Range(-1000, 1000),SerializeField] private int pointValue;
 
@@ -31,7 +31,7 @@ public class Target : MonoBehaviour
         RandomTorque(), RandomTorque());
         transform.position = RandomSpawnPos();
 
-        _gameManager = FindObjectOfType<GameManager>();
+        gameManager = FindObjectOfType<GameManager>();
         if(gameObject.CompareTag("Neutral"))
         {
             _objectType = 1;
@@ -73,10 +73,10 @@ public class Target : MonoBehaviour
     
     private void OnMouseDown()
     {
-        if (_gameManager.gameState == GameManager.GameState.inGame)
+        if (gameManager.gameState == GameManager.GameState.inGame)
         {
             Destroy(gameObject);
-            _gameManager.objectCount++; //Count the amount of object destroyed during the game
+            gameManager.objectCount++; //Count the amount of object destroyed during the game
             ObjectType(_objectType);
             Instantiate(explosionParticle,
                 transform.position, explosionParticle.transform.rotation);
@@ -90,7 +90,7 @@ public class Target : MonoBehaviour
             Destroy(gameObject);
             if(gameObject.CompareTag("Good"))
             {
-                _gameManager.GameOver();
+                gameManager.GameOver();
             }
         }
     }
@@ -103,19 +103,19 @@ public class Target : MonoBehaviour
     {
         if(typeOBject==1)
         {
-            if (_gameManager.neutralCount > 0 & (_gameManager.neutralScore > 0 | _gameManager.neutralScore < 0))
+            if (gameManager.neutralCount > 0 & (gameManager.neutralScore > 0 | gameManager.neutralScore < 0))
             {
-                float neutralDiv = _gameManager.neutralCount / neutralEffect;
-                neutralValue = (int)(_gameManager.neutralScore / neutralDiv);
+                float neutralDiv = gameManager.neutralCount / neutralEffect;
+                neutralValue = (int)(gameManager.neutralScore / neutralDiv);
             }
-            _gameManager.UpdateScore(neutralValue);
-            _gameManager.neutralScore = 0;
-            _gameManager.neutralCount = 0;
+            gameManager.UpdateScore(neutralValue);
+            gameManager.neutralScore = 0;
+            gameManager.neutralCount = 0;
         }
         else if (typeOBject==0)
         {
-            _gameManager.UpdateScore(pointValue);
-            _gameManager.neutralCount++;
+            gameManager.UpdateScore(pointValue);
+            gameManager.neutralCount++;
         }
     }
 }

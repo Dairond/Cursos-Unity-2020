@@ -2,12 +2,12 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - DestroyAfterDelay
+    - DifficultyButton
     - GameManager
     - Target
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.Editor.dll:
-    - TMPro.EditorUtilities.TMP_SettingsEditor
     - TMPro.EditorUtilities.TMPro_FontAssetCreatorWindow
     Unity.TextMeshPro.dll:
     - TMPro.TMP_ColorGradient
@@ -36,7 +36,9 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
+    - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
     Assets/Scenes/Prototype 5.unity:
     - Class: 1
@@ -88,23 +90,29 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13116}
     - Class: 114
-      Script: {instanceID: 13306}
+      Script: {instanceID: 13308}
     - Class: 114
-      Script: {instanceID: 13386}
+      Script: {instanceID: 13388}
     - Class: 114
-      Script: {instanceID: 13598}
+      Script: {instanceID: 13430}
     - Class: 114
-      Script: {instanceID: 13616}
+      Script: {instanceID: 13596}
     - Class: 114
-      Script: {instanceID: 13890}
+      Script: {instanceID: 13600}
     - Class: 114
-      Script: {instanceID: 13976}
+      Script: {instanceID: 13618}
     - Class: 114
-      Script: {instanceID: 14214}
+      Script: {instanceID: 13892}
     - Class: 114
-      Script: {instanceID: 14340}
+      Script: {instanceID: 13960}
     - Class: 114
-      Script: {instanceID: 14470}
+      Script: {instanceID: 13980}
+    - Class: 114
+      Script: {instanceID: 14218}
+    - Class: 114
+      Script: {instanceID: 14344}
+    - Class: 114
+      Script: {instanceID: 14474}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -182,7 +190,7 @@ ScriptsOnlyBuild:
     className: PlayerQuitHandler
   - hash:
       serializedVersion: 2
-      Hash: 8a603d38ebd483830aba6d8410d0487d
+      Hash: 41626e3ab1b74ec59891f69790663425
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -620,6 +628,12 @@ ScriptsOnlyBuild:
     className: Benchmark01_UGUI
   - hash:
       serializedVersion: 2
+      Hash: eb31940e81adf7d7e83a823b12003738
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DifficultyButton
+  - hash:
+      serializedVersion: 2
       Hash: f336e086360abe49a3323e5f1583c35a
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -837,4 +851,4 @@ ScriptsOnlyBuild:
   platform: 5
   scenePathNames:
   - Assets/Scenes/Prototype 5.unity
-  playerPath: K:/Proyectos Unity/Unity Builds/Proyecto 5/Proyecto 05 Quick Click.exe
+  playerPath: K:/Proyectos Unity/Unity Builds/Proyecto 5/Quick Click.exe

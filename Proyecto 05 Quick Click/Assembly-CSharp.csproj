@@ -73,6 +73,7 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
+     <Compile Include="Assets\_Scripts\DifficultyButton.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Course Library\Fonts\Margarine\OFL.txt" />
@@ -686,6 +687,9 @@
     </Reference>
     <Reference Include="Analytics">
         <HintPath>K:/Proyectos Unity/Clases Unity 2020/Proyecto 05 Quick Click/Library/ScriptAssemblies/Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+        <HintPath>K:/Proyectos Unity/Clases Unity 2020/Proyecto 05 Quick Click/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
         <HintPath>K:/Proyectos Unity/Clases Unity 2020/Proyecto 05 Quick Click/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
