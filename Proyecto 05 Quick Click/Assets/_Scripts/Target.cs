@@ -13,13 +13,15 @@ public class Target : MonoBehaviour
     ySpawnPos = -6;
 
     private GameManager gameManager;
+    private DifficultyButton difficultyButton;
+    
 
     [Range(-1000, 1000),SerializeField] private int pointValue;
 
     public ParticleSystem explosionParticle;
-
     private int neutralValue;
     public int neutralEffect = 2;
+
     [Range(0,2)] private int _objectType;
 
     // Start is called before the first frame update
@@ -32,18 +34,9 @@ public class Target : MonoBehaviour
         transform.position = RandomSpawnPos();
 
         gameManager = FindObjectOfType<GameManager>();
-        if(gameObject.CompareTag("Neutral"))
-        {
-            _objectType = 1;
-        }
-        else if(gameObject.CompareTag("PowerUp"))
-        {
-            _objectType = 2;
-        }
-        else if(gameObject.CompareTag("Good") ^ gameObject.CompareTag("Bad"))
-        {
-            _objectType = 0;
-        }
+        difficultyButton = FindObjectOfType<DifficultyButton>();
+        
+        ObjectType();
     }
     
     /// <summary>
@@ -71,13 +64,13 @@ public class Target : MonoBehaviour
         return new Vector3(Random.Range(-xRange, xRange), ySpawnPos);
     }
     
-    private void OnMouseDown()
+    private void OnMouseOver()
     {
         if (gameManager.gameState == GameManager.GameState.inGame)
         {
             Destroy(gameObject);
             gameManager.objectCount++; //Count the amount of object destroyed during the game
-            ObjectType(_objectType);
+            ObjectFunction(_objectType);
             Instantiate(explosionParticle,
                 transform.position, explosionParticle.transform.rotation);
         }
@@ -98,24 +91,47 @@ public class Target : MonoBehaviour
     /// <summary>
     /// Determine the function of the target according to his type
     /// </summary>
-    /// <param name="typeOBject">Type of the object</param>
-    private void ObjectType(int typeOBject)
+    /// <param name="typeObject">Type of the object</param>
+    private void ObjectFunction(int typeObject)
     {
-        if(typeOBject==1)
+        if(typeObject==1)
         {
             if (gameManager.neutralCount > 0 & (gameManager.neutralScore > 0 | gameManager.neutralScore < 0))
             {
-                float neutralDiv = gameManager.neutralCount / neutralEffect;
-                neutralValue = (int)(gameManager.neutralScore / neutralDiv);
+                float neutralMulti = gameManager.neutralCount / neutralEffect;
+                neutralValue = (int)(gameManager.neutralScore * neutralMulti);
             }
             gameManager.UpdateScore(neutralValue);
             gameManager.neutralScore = 0;
             gameManager.neutralCount = 0;
         }
-        else if (typeOBject==0)
+        else if (typeObject==0)
         {
+            if(gameObject.CompareTag("Bad"))
+            {
+                pointValue *= difficultyButton.difficulty;
+            }
             gameManager.UpdateScore(pointValue);
             gameManager.neutralCount++;
+        }
+    }
+    
+    /// <summary>
+    /// Determine the type of the object according to its tag
+    /// </summary>
+    private void ObjectType()
+    {
+        if(gameObject.CompareTag("Neutral"))
+        {
+            _objectType = 1;
+        }
+        else if(gameObject.CompareTag("PowerUp"))
+        {
+            _objectType = 2;
+        }
+        else if(gameObject.CompareTag("Good") ^ gameObject.CompareTag("Bad"))
+        {
+            _objectType = 0;
         }
     }
 }

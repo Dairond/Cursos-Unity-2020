@@ -7,8 +7,10 @@ public class DifficultyButton : MonoBehaviour
 {
     private Button _difButton;
     private GameManager gameManager;
-    private int difficulty;
-    
+    private int Difficulty;
+
+    public int difficulty{ get => Difficulty; }
+
     public enum DifficultyLevels
     {
         easy,
@@ -24,21 +26,21 @@ public class DifficultyButton : MonoBehaviour
         _difButton.onClick.AddListener(SetDifficulty);
         if(selectedDifficulty==DifficultyLevels.easy)
         {
-            difficulty = 1;
+            Difficulty = 1;
         }
         else if (selectedDifficulty==DifficultyLevels.medium)
         {
-            difficulty = 2;
+            Difficulty = 2;
         }
         else if (selectedDifficulty==DifficultyLevels.hard)
         {
-            difficulty = 3;
+            Difficulty = 3;
         }
     }
 
     
     void SetDifficulty()
     {
-        gameManager.StartGame(difficulty);
+        gameManager.StartGame(Difficulty);
     }
 }
