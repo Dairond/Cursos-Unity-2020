@@ -14,13 +14,11 @@ public class Target : MonoBehaviour
 
     private GameManager gameManager;
     private DifficultyButton difficultyButton;
-    
+    private NeutralPowers neutralPowers;
 
     [Range(-1000, 1000),SerializeField] private int pointValue;
 
     public ParticleSystem explosionParticle;
-    private int neutralValue;
-    public int neutralEffect = 2;
 
     [Range(0,2)] private int _objectType;
 
@@ -35,7 +33,8 @@ public class Target : MonoBehaviour
 
         gameManager = FindObjectOfType<GameManager>();
         difficultyButton = FindObjectOfType<DifficultyButton>();
-        
+        neutralPowers = FindObjectOfType<NeutralPowers>();
+
         ObjectType();
     }
     
@@ -96,14 +95,7 @@ public class Target : MonoBehaviour
     {
         if(typeObject==1)
         {
-            if (gameManager.neutralCount > 0 & (gameManager.neutralScore > 0 | gameManager.neutralScore < 0))
-            {
-                float neutralMulti = gameManager.neutralCount / neutralEffect;
-                neutralValue = (int)(gameManager.neutralScore * neutralMulti);
-            }
-            gameManager.UpdateScore(neutralValue);
-            gameManager.neutralScore = 0;
-            gameManager.neutralCount = 0;
+            neutralPowers.NeutralHabilities();
         }
         else if (typeObject==0)
         {

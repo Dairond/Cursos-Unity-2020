@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4562093451351523157}
   - component: {fileID: 94351571185681134}
   - component: {fileID: 3075364987346918287}
+  - component: {fileID: -8559795682888519984}
   - component: {fileID: -411658146160725672}
   m_Layer: 9
   m_Name: Neutral02
@@ -129,7 +130,20 @@ MonoBehaviour:
   pointValue: 0
   explosionParticle: {fileID: 8360950047424177633, guid: 292bd389ea821f745a4ba37caa6842a0,
     type: 3}
-  neutralEffect: 4
+--- !u!114 &-8559795682888519984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7468313882460264066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3921ca5768dcf9640a546ae7c427ecc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neutralEffect: 2
+  nuetralType: 1
 --- !u!96 &-411658146160725672
 TrailRenderer:
   serializedVersion: 2

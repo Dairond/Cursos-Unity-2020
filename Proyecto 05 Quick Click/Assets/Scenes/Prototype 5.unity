@@ -734,6 +734,7 @@ MonoBehaviour:
   minutesCount: 0
   titleScreen: {fileID: 706744345}
   inGameScreen: {fileID: 1453575051}
+  gameOverScreen: {fileID: 852757526}
   lives:
   - {fileID: 1849134045}
   - {fileID: 1908439511}
